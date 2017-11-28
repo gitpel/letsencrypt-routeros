@@ -1,15 +1,17 @@
 # Let's Encrypt RouterOS / Mikrotik
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
-### How it's works:
-* Dedicated Linux renew and Push certificates to RouterOS / Mikrotik
-* After you renew your certificates using CertBot
-* The script connects to your RouterOS / Mikrotik using DSA Key
+[![N|Solid](https://i.mt.lv/mtv2/logo.svg)](https://nodesource.com/products/nsolid)
+
+### How it works:
+* Dedicated Linux renew and push certificates to RouterOS / Mikrotik
+* After CertBot renew your certificates
+* The script connects to RouterOS / Mikrotik using DSA Key (without password or user input)
 * Delete previous certificate files
-* Delete previous certificate
-* Upload two new files: Certificate and Key
-* Import new certificate and key
-* Change SSTP Server Settings to new certificate
+* Delete the previous certificate
+* Upload two new files: **Certificate** and **Key**
+* Import **Certificate** and **Key**
+* Change **SSTP Server Settings** to use new certificate
 * Delete certificate and key files form RouterOS / Mikrotik storage
 
 ### Installation on Ubuntu 16.04
@@ -54,9 +56,9 @@ scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@
 ### Setup RouterOS / Mikrotik side
 *Check that user is the same as in the settings file letsencrypt-routeros.settings*
 
-*Check mikrotik ssh port in /ip services ssh*
+*Check Mikrotik ssh port in /ip services ssh*
 
-*Check mikrotik firewall to accept on SSH port*
+*Check Mikrotik firewall to accept on SSH port*
 ```sh
 :put "Enable SSH"
 /ip service enable ssh
@@ -77,7 +79,7 @@ apt update
 apt install certbot -y
 ```
 
-***In the first time you will need to create Certificates manually and put domain TXT record***
+***In the first time, you will need to create Certificates manually and put domain TXT record***
 
 *follow CertBot instructions*
 ```sh
@@ -99,3 +101,11 @@ certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-
 ```sh
 certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
+
+### Edit Script
+You can easily edit script to execute your commands on RouterOS / Mikrotik after certificates renewal
+
+---
+Licence
+
+MIT
