@@ -1,16 +1,29 @@
 # Let's Encrypt RouterOS / Mikrotik
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
-### Installation on Ubuntu 16.04
-**Similar way you can use for Debian/CentOS/AMI Linux**
+### How it's works:
+* When you renew your certificates using CertBot
+* The script connects to your RouterOS / Mikrotik using DSA Key
+* Delete previous certificate files
+* Delete previous certificate
+* Upload two new files: Certificate and Key
+* Import new certificate and key
+* Change SSTP Server Settings to new certificate
+* Delete certificate and key files form RouterOS / Mikrotik storage
 
+### Installation on Ubuntu 16.04
+*Similar way you can use on Debian/CentOS/AMI Linux/Arch/Others*
+
+Download the repo to your system
 ```sh
 sudo -s
 cd /opt
 git clone https://github.com/gitpel/letsencrypt-routeros
 ```
 Edit the settings file:
-
+```sh
+vim /opt/letsencrypt-routeros/letsencrypt-routeros.settings
+```
 | Variable Name | Data |
 | ------ | ------ |
 | ROUTEROS_USER | admin |
@@ -19,22 +32,21 @@ Edit the settings file:
 | ROUTEROS_PRIVATE_KEY | /opt/letsencrypt-routeros/id_dsa |
 | DOMAIN | router.mydomain.com |
 
-```sh
-vim /opt/letsencrypt-routeros/letsencrypt-routeros.settings
-```
-
 Change permissions:
 ```sh
 chmod +x /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
 Generate DSA Key for RouterOS
+
 *Make sure to leave the passphrase blank (-N "")*
+
 ```sh
 ssh-keygen -t dsa -f /opt/letsencrypt-routeros/id_dsa -N ""
 ```
 
-Send DSA 
-*You will need to
+Send DSA
+
+*You will need to*
 ```sh
 source /opt/letsencrypt-routeros/letsencrypt-routeros.settings
 scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@"$ROUTEROS_HOST":"id_dsa.pub" 
