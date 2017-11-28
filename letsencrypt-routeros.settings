@@ -1,0 +1,9 @@
+#!/bin/bash
+## Settings file for RouterOS Let's Encrypt Script
+## Please avoid space
+
+ROUTEROS_USER=admin
+ROUTEROS_HOST=10.0.0.254
+ROUTEROS_SSH_PORT=22
+ROUTEROS_PRIVATE_KEY=/opt/letsencrypt-routeros/id_dsa
+DOMAIN=vpnserver.yourdomain.com
