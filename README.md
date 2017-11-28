@@ -96,5 +96,5 @@ certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-
 ```
 *To use script with CertBot hooks:*
 ```sh
-certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook ./opt/letsencrypt-routeros/letsencrypt-routeros.sh
+certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
