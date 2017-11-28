@@ -2,7 +2,8 @@
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
 ### How it's works:
-* When you renew your certificates using CertBot
+* Dedicated Linux renew and Push certificates to RouterOS / Mikrotik
+* After you renew your certificates using CertBot
 * The script connects to your RouterOS / Mikrotik using DSA Key
 * Delete previous certificate files
 * Delete previous certificate
