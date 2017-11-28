@@ -44,9 +44,7 @@ Generate DSA Key for RouterOS
 ssh-keygen -t dsa -f /opt/letsencrypt-routeros/id_dsa -N ""
 ```
 
-Send DSA
-
-*You will need to*
+Send Generated DSA Key to RouterOS / Mikrotik
 ```sh
 source /opt/letsencrypt-routeros/letsencrypt-routeros.settings
 scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@"$ROUTEROS_HOST":"id_dsa.pub" 
@@ -54,7 +52,9 @@ scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@
 
 ### Setup RouterOS / Mikrotik side
 *Check that user is the same as in the settings file letsencrypt-routeros.settings*
+
 *Check mikrotik ssh port in /ip services ssh*
+
 *Check mikrotik firewall to accept on SSH port*
 ```sh
 :put "Enable SSH"
@@ -66,7 +66,8 @@ scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@
 
 ### CertBot Let's Encrypt
 Install CertBot using official manuals https://certbot.eff.org/#ubuntuxenial-other
-For Ubuntu 16.04
+
+*for Ubuntu 16.04*
 ```sh
 apt update
 apt install software-properties-common -y
@@ -76,17 +77,24 @@ apt install certbot -y
 ```
 
 ***In the first time you will need to create Certificates manually and put domain TXT record***
-*follow the certbot instructions*
+
+*follow CertBot instructions*
 ```sh
 source /opt/letsencrypt-routeros/letsencrypt-routeros.settings
-certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok"
+certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok
 ```
 
-### Usage:
+### Usage of the script
+*To use settings form the settings file:*
 ```sh
-letsencrypt-routeros.sh
+./opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
-or:
+*To use script without settings file:*
+
 ```sh
-letsencrypt-routeros.sh [RouterOS User] [RouterOS Host] [SSH Port] [SSH Private Key] [Domain]
+./opt/letsencrypt-routeros/letsencrypt-routeros.sh [RouterOS User] [RouterOS Host] [SSH Port] [SSH Private Key] [Domain]
+```
+*To use script with CertBot hooks:*
+```sh
+certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook ./opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
