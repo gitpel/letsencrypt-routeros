@@ -1,7 +1,7 @@
 # Let's Encrypt RouterOS / Mikrotik
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
-![Image](https://i.mt.lv/mtv2/logo.svg)<!-- .element width="50px" -->(https://nodesource.com/products/nsolid)
+![Mikrotik | (https://i.mt.lv/mtv2/logo.svg)](https://nodesource.com/products/nsolid)
 
 
 ### How it works:
