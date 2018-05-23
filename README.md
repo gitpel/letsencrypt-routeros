@@ -38,7 +38,7 @@ vim /opt/letsencrypt-routeros/letsencrypt-routeros.settings
 
 Change permissions:
 ```sh
-chmod +x /opt/letsencrypt-routeros/letsencrypt-routeros.sh
+chmod +x /opt/letsencrypt-routeros/letsencrypt-mikrotik.sh
 ```
 Generate DSA Key for RouterOS
 
