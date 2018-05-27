@@ -1,6 +1,8 @@
 # Let's Encrypt RouterOS / Mikrotik
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
+*UPD 2018-05-27: Works with wildcard Let's Encrypt Domains*
+
 [![Mikrotik](https://i.mt.lv/mtv2/logo.svg)](https://mikrotik.com/)
 
 
@@ -28,13 +30,14 @@ Edit the settings file:
 ```sh
 vim /opt/letsencrypt-routeros/letsencrypt-routeros.settings
 ```
-| Variable Name | Data |
-| ------ | ------ |
-| ROUTEROS_USER | admin |
-| ROUTEROS_HOST | 10.0.254.254 |
-| ROUTEROS_SSH_PORT | 22 |
-| ROUTEROS_PRIVATE_KEY | /opt/letsencrypt-routeros/id_dsa |
-| DOMAIN | router.mydomain.com |
+| Variable Name | Value | Description |
+| ------ | ------ | ------ |
+| ROUTEROS_USER | admin | user with admin rights to connect to RouterOS |
+| ROUTEROS_HOST | 10.0.254.254 | RouterOS\Mikrotik IP |
+| ROUTEROS_SSH_PORT | 22 | RouterOS\Mikrotik PORT |
+| ROUTEROS_PRIVATE_KEY | /opt/letsencrypt-routeros/id_dsa | Private Key to connecto to RouterOS |
+| DOMAIN | mydomain.com | Use main domain for wildcard certificate or subdomain for subdomain certificate |
+
 
 Change permissions:
 ```sh
@@ -98,7 +101,11 @@ certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-
 ```sh
 ./opt/letsencrypt-routeros/letsencrypt-routeros.sh [RouterOS User] [RouterOS Host] [SSH Port] [SSH Private Key] [Domain]
 ```
-*To use script with CertBot hooks:*
+*To use script with CertBot hooks for wildcard domain:*
+```sh
+certbot certonly --preferred-challenges=dns --manual -d *.$DOMAIN --manual-public-ip-logging-ok --post-hook /opt/letsencrypt-routeros/letsencrypt-routeros.sh --server https://acme-v02.api.letsencrypt.org/directory
+```
+*To use script with CertBot hooks for subdomain:*
 ```sh
 certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
