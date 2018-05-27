@@ -41,6 +41,8 @@ if [ ! -f $CERTIFICATE ] && [ ! -f $KEY ]; then
         echo -e "Please use CertBot Let'sEncrypt:"
         echo "============================"
         echo "certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok"
+        echo "or (for wildcard certificate):"
+        echo "certbot certonly --preferred-challenges=dns --manual -d *.$DOMAIN --manual-public-ip-logging-ok --server https://acme-v02.api.letsencrypt.org/directory"
         echo "==========================="
         echo -e "and follow instructions from CertBot\n"
         exit 1
