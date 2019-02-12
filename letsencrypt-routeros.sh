@@ -20,6 +20,7 @@ fi
 
 CERTIFICATE=/etc/letsencrypt/live/$DOMAIN/cert.pem
 KEY=/etc/letsencrypt/live/$DOMAIN/privkey.pem
+CHAIN=/etc/letsencrypt/live/$DOMAIN/chain.pem
 
 #Create alias for RouterOS command
 routeros="ssh -i $ROUTEROS_PRIVATE_KEY $ROUTEROS_USER@$ROUTEROS_HOST -p $ROUTEROS_SSH_PORT"
@@ -72,6 +73,17 @@ sleep 2
 $routeros /certificate import file-name=$DOMAIN.key passphrase=\"\"
 # Delete Certificate file after import
 $routeros /file remove $DOMAIN.key
+
+# Create Chain
+# Delete Chain file if the file exist on RouterOS
+$routeros /file remove $DOMAIN-chain.pem> /dev/null
+# Upload Chain to RouterOS
+scp -q -P $ROUTEROS_SSH_PORT -i "$ROUTEROS_PRIVATE_KEY" "$CHAIN" "$ROUTEROS_USER"@"$ROUTEROS_HOST":"$DOMAIN-chain.pem"
+sleep 2
+# Import Chain file
+$routeros /certificate import file-name=$DOMAIN-chain.pem passphrase=\"\"
+# Delete Chain file after import
+$routeros /file remove $DOMAIN-chain.pem
 
 # Setup Certificate to SSTP Server
 $routeros /interface sstp-server server set certificate=$DOMAIN.pem_0
