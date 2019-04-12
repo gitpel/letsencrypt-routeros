@@ -43,18 +43,18 @@ Change permissions:
 ```sh
 chmod +x /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
-Generate DSA Key for RouterOS
+Generate RSA Key for RouterOS
 
 *Make sure to leave the passphrase blank (-N "")*
 
 ```sh
-ssh-keygen -t dsa -f /opt/letsencrypt-routeros/id_dsa -N ""
+ssh-keygen -t rsa -f /opt/letsencrypt-routeros/id_rsa -N ""
 ```
 
-Send Generated DSA Key to RouterOS / Mikrotik
+Send Generated RSA Key to RouterOS / Mikrotik
 ```sh
 source /opt/letsencrypt-routeros/letsencrypt-routeros.settings
-scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@"$ROUTEROS_HOST":"id_dsa.pub" 
+scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_rsa.pub "$ROUTEROS_USER"@"$ROUTEROS_HOST":"id_rsa.pub" 
 ```
 
 ### Setup RouterOS / Mikrotik side
@@ -67,8 +67,8 @@ scp -P $ROUTEROS_SSH_PORT /opt/letsencrypt-routeros/id_dsa.pub "$ROUTEROS_USER"@
 :put "Enable SSH"
 /ip service enable ssh
 
-:put "Add to the user DSA Public Key"
-/user ssh-keys import user=admin public-key-file=id_dsa.pub
+:put "Add to the user RSA Public Key"
+/user ssh-keys import user=admin public-key-file=id_rsa.pub
 ```
 
 ### CertBot Let's Encrypt
