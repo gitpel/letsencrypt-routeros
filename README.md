@@ -2,6 +2,7 @@
 **Let's Encrypt certificates for RouterOS / Mikrotik**
 
 *UPD 2018-05-27: Works with wildcard Let's Encrypt Domains*
+*UPD 2019-07-11: Works with OpenSSH 7+*
 
 [![Mikrotik](https://i.mt.lv/mtv2/logo.svg)](https://mikrotik.com/)
 
@@ -15,7 +16,9 @@
 * Upload two new files: **Certificate** and **Key**
 * Import **Certificate** and **Key**
 * Change **SSTP Server Settings** to use new certificate
-* Delete certificate and key files form RouterOS / Mikrotik storage
+* Change **WWW-SSL Service** to use new certificate
+* Change **API-SSL Service** to use new certificate
+* Delete certificate and key files from RouterOS / Mikrotik storage
 
 ### Installation on Ubuntu 16.04
 *Similar way you can use on Debian/CentOS/AMI Linux/Arch/Others*

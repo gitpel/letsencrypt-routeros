@@ -56,7 +56,7 @@ if [ ! -f $CERTIFICATE ] && [ ! -f $KEY ]; then
         exit 1
 fi
 
-# Set up variables to remove erros
+# Set up variables to remove errors
 DOMAIN_INSTALLED_CERT_FILE=$DOMAIN.pem_0
 DOMAIN_CERT_FILE=$DOMAIN.pem
 DOMAIN_KEY_FILE=$DOMAIN.key
