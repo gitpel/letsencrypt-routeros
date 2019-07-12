@@ -5,5 +5,5 @@
 ROUTEROS_USER=admin
 ROUTEROS_HOST=10.0.254.254
 ROUTEROS_SSH_PORT=22
-ROUTEROS_PRIVATE_KEY=/opt/letsencrypt-routeros/id_dsa
+ROUTEROS_PRIVATE_KEY=/opt/letsencrypt-routeros/id_rsa
 DOMAIN=vpnserver.yourdomain.com
