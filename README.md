@@ -114,13 +114,6 @@ certbot certonly --preferred-challenges=dns --manual -d *.$DOMAIN --manual-publi
 certbot certonly --preferred-challenges=dns --manual -d $DOMAIN --manual-public-ip-logging-ok --post-hook /opt/letsencrypt-routeros/letsencrypt-routeros.sh
 ```
 
-### Edit Script
-You can easily edit script to execute your commands on RouterOS / Mikrotik after certificates renewal
-Add these strings in the «.sh» file before «exit 0» to have www-ssl and api-ssl works with Let's Encrypt SSL
-```sh
-$routeros /ip service set www-ssl certificate=$DOMAIN.pem_0
-$routeros /ip service set api-ssl certificate=$DOMAIN.pem_0
-```
 ---
 ### Licence MIT
 Copyright 2018 Konstantin Gimpel
